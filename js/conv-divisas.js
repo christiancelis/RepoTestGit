@@ -1,12 +1,13 @@
 
+const selected = document.getElementById("div-orig");
 
-const click = document.querySelector("select")
-click = addEventListener("click", (e) => {
+selected.addEventListener("click",(e)=>{
     e.preventDefault();
-    conversion();
-
+    conversion(e);
     e.stopPropagation();
-});
+})
+
+
 
 // UTILIZANDO ASYNC AWAIT
 async function converMonedas() {
@@ -14,27 +15,29 @@ async function converMonedas() {
 
     const respuesta = await fetch(url);
 
+    
     //si la respuesta no fue exitosa
-    if (!respuesta.ok)
+    if (!respuesta.ok){
         throw new Error("Error. No se pudo hacer la conversión")
+        return false
+    }else{
+        const json = await respuesta.json();
+        return json 
+    }
+       
 
-    const json = await respuesta.json();
+    
+    
     // retornar el valor de pesos
-    let eur = json.rates.EUR;
-    let cad = json.rates.CAD;
-    let mxn = json.rates.MXN;
-    let cop = json.rates.COP;
-
-    return [eur, cad, mxn, cop];
+    
 }
 
-async function conversion() {
+async function conversion(e) {
     try {
         let listaMonedas = await converMonedas();
-        let euro = listaMonedas[0]
-        let cad = listaMonedas[1]
-        let mxn = listaMonedas[2]
-        let cop = listaMonedas[3]
+        
+        agregarValoresalSelect(listaMonedas, e)
+
 
         let euroValor = document.getElementById('inpEuro').value;
         
@@ -54,3 +57,67 @@ async function conversion() {
         console.error(error.message);
     }
     }
+
+function agregarValoresalSelect(listamonedas,e){
+
+    listamonedas.forEach(element => {
+        console.log(element.rates)
+        elementoselec = document.createElement("option")
+        elementoselec.setAttribute("value",element.rates)
+    });
+    
+}
+
+
+
+
+
+
+       
+
+
+        async function getDivisa(){
+
+            url = "https://cdn.dinero.today/api/ecb.json"
+
+            const respuesta = await fetch(url);
+
+            if(!respuesta.ok){
+           throw new Error("Error, obtener divisa");
+            }
+            const json = await respuesta.json()
+
+            return(json)
+
+        }
+
+
+    let btnc = document.getElementById("btc")
+    btnc.addEventListener("click",(e)=>{
+        e.preventDefault()
+        divisa()
+    })
+
+        async function divisa(){
+            try {
+                const vDivisas = await getDivisa()
+                valorbase = vDivisas.rates.EUR
+                let inputeuros = document.getElementById("veuros")
+                let inputdolar = document.getElementById("vdolar")
+                let euros = inputeuros.value
+
+                let dolares = euros / valorbase
+
+                inputdolar.value = dolares.toFixed(3)
+                
+            } catch (error) {
+                console.log(error.message)
+            }
+          
+
+        }
+
+    </script>
+    
+</body>
+</html>
