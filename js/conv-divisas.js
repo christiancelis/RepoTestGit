@@ -10,6 +10,7 @@ sl.forEach((element)=>{
     });
 });
 
+
 async function getDivisa(){
 
     url = "https://cdn.dinero.today/api/ecb.json"
