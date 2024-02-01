@@ -1,7 +1,12 @@
 
 
+const click = document.querySelector("select")
+click = addEventListener("click", (e) => {
+    e.preventDefault();
+    conversion();
 
-addEventListener()
+    e.stopPropagation();
+});
 
 // UTILIZANDO ASYNC AWAIT
 async function converMonedas() {
