@@ -1,11 +1,13 @@
 body{
     width: 100dvw;
-    height: 100dvh;
+    height: 80dvh;
+    display: flex;
+    align-items: center;
 }
 
 
 .container{
-    width: 35rem;
+    width: 30rem;
     height: 300px;
     margin: 0 auto;    
     background-color: whitesmoke;
@@ -13,6 +15,8 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    border: 2px solid rgb(219, 110, 110);
+    border-radius: 1rem;
 }
 
 .conversor{
@@ -58,18 +62,21 @@ body{
 }
 
 #cant-orig{
+    height: 1.5rem;
     grid-column: 2/3;
     grid-row: 2/3;
     background-color: #fefce0;
 }
 
 #cant-dest{
+    height: 1.5rem;
     grid-column: 2/3;
     grid-row: 3/4;
     background-color: #dfedd6;
 }
 
 #div-orig{
+    height: 1.8rem;
     grid-column: 3/4;
     grid-row: 2/3;
     background-color: #fefce0;
@@ -77,12 +84,18 @@ body{
 
 
 #div-dest{
+    height: 1.8rem;
     grid-column: 3/4;
     grid-row: 3/4;
     background-color: #dfedd6;
 }
 
 #guardar{
+    height: 1.8rem;
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+    font-size: 1.3rem;
     grid-column: 3/4;
     grid-row: 4/5;
 }
